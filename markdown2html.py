@@ -10,10 +10,9 @@ if len(argv) <= 2:
     stderr.write("Usage: ./markdown2html.py README.md README.html\n")
     exit(1)
 
-elif file_exists == False:
+elif file_exists is False:
     stderr.write("Missing {}\n".format(file1))
     exit(1)
 
 else:
     exit(0)
-
