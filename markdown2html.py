@@ -43,10 +43,11 @@ def init(openlist, menssag):
     return text1
 
 
-def add_item(items, read_line):
+def add_item(items, read_line, menssag):
     text = read_line.replace("\n", "")
-    text = text.replace("- ", "")
-    return item[0] + text + item[1] + "\n"
+    text = text.replace(menssag + " ", "")
+    text = item[0] + text + item[1] + "\n"
+    return text
 
 if __name__ == "__main__":
 
@@ -63,7 +64,8 @@ if __name__ == "__main__":
 
     file2 = argv[2]
     menssage = {"#": ["<h0>", "</h0>"],
-                "-": ["<ul>", "</ul>"]}
+                "-": ["<ul>", "</ul>"],
+                "\*": ["<ol>", "</ol>"]}
     item = ["<li>", "</li>"]
     lists = {"-": False, "*": False}
     openlist = [False, ""]
@@ -81,15 +83,17 @@ if __name__ == "__main__":
                 if expr in lists:
                     if openlist[0] is False:
                         openlist[0] = True
-                        openlist[1] = expr
+                        openlist[1] = key
                         word += init(openlist[0], menssage[openlist[1]])
-                    word += add_item(item, read_line)
+                    word += add_item(item, read_line, expr)
+                    break
                 else:
                     if openlist[0]:
                         openlist[0] = False
                         word += init(openlist[0], menssage[openlist[1]])
 
                     word += heading(expr, value, read_line.replace("\n", ""))
+                    break
         else:
             if openlist[0]:
                 openlist[0] = False
