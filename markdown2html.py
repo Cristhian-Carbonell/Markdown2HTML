@@ -40,10 +40,8 @@ if __name__ == "__main__":
                 for i in s:
                     if i == "#":
                         count += 1
-                if menssage == 0:
-                    word = "<h{0}>My title</h{0}>\n".format(count)
-                else:
-                    word = "<h{0}>My title{1}</h{0}>\n".format(count, menssage)
+            word = "<h{0}>{1}</h{0}>\n".format(count, r[count + 1:].
+                                               replace("\n", ""))
 
             fe = open(file2, 'a', encoding="utf-8")
             fe.write(word)
