@@ -29,4 +29,23 @@ if __name__ == "__main__":
         stderr.write("Missing {}\n".format(file1))
         exit(1)
 
+    file2 = argv[2]
+    with open(file1, "r") as f:
+        menssage = 0
+        for r in f:
+            count = 0
+
+            if "#" in r:
+                s = r
+                for i in s:
+                    if i == "#":
+                        count += 1
+                if menssage == 0:
+                    word = "<h{0}>My title</h{0}>\n".format(count)
+                else:
+                    word = "<h{0}>My title{1}</h{0}>\n".format(count, menssage)
+
+            fe = open(file2, 'a', encoding="utf-8")
+            fe.write(word)
+            menssage += 1
     exit(0)
