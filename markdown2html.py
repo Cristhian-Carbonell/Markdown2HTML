@@ -14,7 +14,22 @@
 """
 
 from sys import argv, exit, stderr
+import re
 from os.path import exists
+
+def expr(read_line, menssage):
+    temp = "(0)+".replace("0", menssage)
+    expr = re.match(temp, read_line)
+    if expr:
+        return str(expr.group())
+    return None
+
+def heading(messange, value, read_line):
+    level = str(len(menssage))
+    op_value = value[0].replace("0", level)
+    cl_value = value[1].replace("0", level)
+    cont = "" + read_line.replace(menssage + " ", "")
+    return op_value + content + cl_value + "\n"
 
 if __name__ == "__main__":
 
@@ -30,20 +45,16 @@ if __name__ == "__main__":
         exit(1)
 
     file2 = argv[2]
+    menssage = {"#": ["<h0>", "</h0>"]}
+    word = ""
+    expr = None
+
     with open(file1, "r") as f:
-        menssage = 0
-        for r in f:
-            count = 0
-
-            if "#" in r:
-                s = r
-                for i in s:
-                    if i == "#":
-                        count += 1
-            word = "<h{0}>{1}</h{0}>\n".format(count, r[count + 1:].
-                                               replace("\n", ""))
-
-            fe = open(file2, 'a', encoding="utf-8")
-            fe.write(word)
-            menssage += 1
+        for read_line in f:
+            for key, value in menssage.items():
+                expr = expr(read_line, key)
+                if expr is None:
+                    word += read_line
+                    continue
+                word += 
     exit(0)
