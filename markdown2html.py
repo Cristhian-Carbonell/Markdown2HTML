@@ -17,19 +17,19 @@ from sys import argv, exit, stderr
 import re
 from os.path import exists
 
-def expr(read_line, menssage):
+def expresion(read_line, menssage):
     temp = "(0)+".replace("0", menssage)
     expr = re.match(temp, read_line)
     if expr:
         return str(expr.group())
     return None
 
-def heading(messange, value, read_line):
-    level = str(len(menssage))
-    op_value = value[0].replace("0", level)
-    cl_value = value[1].replace("0", level)
-    cont = "" + read_line.replace(menssage + " ", "")
-    return op_value + content + cl_value + "\n"
+def heading(expr1, value1, read_line1):
+    level = str(len(expr1))
+    op_value = value1[0].replace("0", level)
+    cl_value = value1[1].replace("0", level)
+    cont = "" + read_line1.replace(expr1 + " ", "")
+    return op_value + cont + cl_value + "\n"
 
 if __name__ == "__main__":
 
@@ -46,15 +46,19 @@ if __name__ == "__main__":
 
     file2 = argv[2]
     menssage = {"#": ["<h0>", "</h0>"]}
-    word = ""
+    word = ''
     expr = None
 
     with open(file1, "r") as f:
         for read_line in f:
             for key, value in menssage.items():
-                expr = expr(read_line, key)
+                expr = expresion(read_line, key)
                 if expr is None:
                     word += read_line
                     continue
-                word += 
+                word += heading(expr, value, read_line.replace("\n", ""))
+
+    with open(file2, "w") as new_f:
+        new_f.write(word)
+
     exit(0)
