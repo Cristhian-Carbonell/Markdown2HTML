@@ -92,6 +92,7 @@ if __name__ == "__main__":
                     word += heading(expr, value, read_line.replace("\n", ""))
         else:
             if openlist[0]:
+                openlist[0] = False
                 word += init(openlist[0], menssage[openlist[1]])
 
     with open(file2, "w") as new_f:
